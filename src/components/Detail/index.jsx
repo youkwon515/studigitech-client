@@ -3,25 +3,39 @@ import { useNavigate } from "react-router-dom";
 import Header from "../Header";
 import MarkdownPreview from '@uiw/react-markdown-preview';
 import * as S from './styled';
-import { pullBlogDetail, pushBlog } from '../../utils/blog';
+import { pullBlog, pullBlogDetail, pushBlog, UpdateBlog } from '../../utils/blog';
 import { pullLogin } from '../../utils/login';
-import { clearIdx, pullIdx } from '../../utils/idx';
+import { pullIdx } from '../../utils/idx';
 
 function Detail() {
     const movePage = useNavigate();
     const data = pullIdx() ? pullBlogDetail(pullIdx()) : null;
     const [source, setSource] = useState(data ? data.content : '# 제목');
-
     const handleChange = (e) => {
         setSource(e.target.value);
     };
-
+    
     const handleSubmit = () => {
         const title = source.split('\n')[0];
         const content = source;
         const user = pullLogin();
         pushBlog(title, content, user);
-        clearIdx();
+        // clearIdx();
+        movePage('/');
+    }
+
+    const handleUpdate = () => {
+        const blogList = pullBlog();
+        console.log()
+        if (pullIdx() >= 0 && pullIdx() < blogList.length) {
+            const uptitle = source.split('\n')[0];
+            const upcontent = source;
+            const upuser = pullLogin();
+            blogList[pullIdx()] = {title : uptitle, content : upcontent, user : upuser}
+            UpdateBlog(blogList);
+        } else {
+            console.log("update error");
+        }
         movePage('/');
     }
     
@@ -33,9 +47,9 @@ function Detail() {
                 <S.MarkdownPreview>
                     <MarkdownPreview source={source} />
                 </S.MarkdownPreview>
-                {data ? data.user === pullLogin() : true && <S.MarkdownCode onChange={handleChange} value={source}></S.MarkdownCode>}
+                {data ? data.user === pullLogin() && <S.MarkdownCode onChange={handleChange} value={source}></S.MarkdownCode> : true && <S.MarkdownCode onChange={handleChange} value={source}></S.MarkdownCode>}
             </S.Contents>
-            {data ? data.user === pullLogin() : true && <S.C_Btn onClick={handleSubmit}>작성 완료</S.C_Btn>}
+            {data ? data.user === pullLogin() && <S.C_Btn onClick={handleUpdate}>수정 완료</S.C_Btn> : true && <S.C_Btn onClick={handleSubmit}>작성 완료</S.C_Btn>}
         </S.Main>
         </>
     );
