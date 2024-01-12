@@ -13,10 +13,11 @@ function Home() {
             clearIdx();
             movePage('/blog/'+pullLogin());
         } else {
-            alert('로그인 해주세요');
+            alert('로그인 하십시오');
+            movePage('/login/');
         }
     }
-    
+
     return (
         <>
         <Header />
