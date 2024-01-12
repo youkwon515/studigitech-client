@@ -31,7 +31,10 @@ function Detail() {
         const blogList = pullBlog();
         console.log()
         if (pullIdx() >= 0 && pullIdx() < blogList.length) {
-            const uptitle = source.split('\n')[0];
+            let uptitle = source.split('\n')[0];
+            if (uptitle.includes('#')) {
+                uptitle = uptitle.split('#').join('');
+            }
             const upcontent = source;
             const upuser = pullLogin();
             blogList[pullIdx()] = {title : uptitle, content : upcontent, user : upuser}
