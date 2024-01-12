@@ -36,6 +36,10 @@ export const LoginBox = styled.div`
     height : 40px;
     border-radius: 100%;
     background : #fff;
+    > img {
+        width : 100%;
+        height : 100%;
+    }
 `;
 
 export const UserBox = styled.p`
