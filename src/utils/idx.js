@@ -7,5 +7,6 @@ export const pushIdx = (value) => {
 }
 
 export const clearIdx = () => {
-    localStorage.setItem("idx", null);
+    //localStorage.setItem("idx", null);
+    localStorage.removeItem("idx");
 }
