@@ -5,10 +5,15 @@ import { pullLogin } from '../../utils/login';
 import { clearIdx } from '../../utils/idx';
 
 function Header() {
+
+    const handleClear = () => {
+        clearIdx();
+    }
+
     return (
         <S.HeaderDiv>
             <S.ContentsDiv>
-                <Link to="/" onClick={clearIdx()}>
+                <Link to="/" onClick={handleClear}>
                     <S.LogoBox>
                         <img src={logo} alt="" />
                     </S.LogoBox>
