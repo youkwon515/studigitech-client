@@ -16,7 +16,10 @@ function Detail() {
     };
     
     const handleSubmit = () => {
-        const title = source.split('\n')[0];
+        let title = source.split('\n')[0];
+        if (title.includes('#')) {
+            title = title.split('#').join('');
+        }
         const content = source;
         const user = pullLogin();
         pushBlog(title, content, user);
