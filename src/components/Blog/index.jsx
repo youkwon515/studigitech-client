@@ -10,8 +10,11 @@ function Blog({title, user, idx}) {
 
     return (
         <S.Item onClick={handleDetail}>
-            <p>{title}</p>
-            <p>{user}</p>
+            <S.ItemNumber>{idx + 1}</S.ItemNumber>
+            <S.ItemData>
+                <p>{title}</p>
+                <p>{user}</p>
+            </S.ItemData>
         </S.Item>
     );
 }
