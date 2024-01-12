@@ -36,8 +36,18 @@ function Login() {
                 !pullLogin() ? 
                 <>
                 <S.Title>로그인</S.Title>
-                <S.NameInp onChange={handleChange} value={name}></S.NameInp>
-                <S.PWInp type='password'></S.PWInp>
+                <S.InputBox>
+                    <S.Input
+                    onChange={handleChange}
+                    value={name}
+                    placeholder="아이디"
+                    ></S.Input>
+                    <S.Label htmlFor="username">아이디</S.Label>
+                </S.InputBox>
+                <S.InputBox>
+                    <S.Input type="password" placeholder="비밀번호"></S.Input>
+                    <S.Label htmlFor="password">비밀번호</S.Label>
+                </S.InputBox>
                 <S.Submit onClick={handleLogin}>로그인</S.Submit>
                 </> : <S.Submit onClick={handleLogout}>로그아웃</S.Submit>
                 }
